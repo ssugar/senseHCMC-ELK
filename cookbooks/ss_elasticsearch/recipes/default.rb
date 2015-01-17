@@ -22,10 +22,10 @@ execute "start_elasticsearch" do
   command "service elasticsearch start"
 end
 
-execute "install_elasticsearch_head" do
-  command "/usr/share/elasticsearch/bin/plugin --install mobz/elasticsearch-head"
-end
+#execute "install_elasticsearch_head" do
+#  command "/usr/share/elasticsearch/bin/plugin --install mobz/elasticsearch-head"
+#end
 
-execute "install_elasticsearch_head" do
-  command "/usr/share/elasticsearch/bin/plugin --install lukas-vlcek/bigdesk"
-end
+#execute "install_elasticsearch_head" do
+#  command "/usr/share/elasticsearch/bin/plugin --install lukas-vlcek/bigdesk"
+#end
