@@ -30,7 +30,7 @@ If not using Vagrant and Chef, run the following commands on a fresh debian/ubun
 ###Install Kibana 3###
     wget https://download.elasticsearch.org/kibana/kibana/kibana-latest.tar.gz
     tar -xvzf kibana-latest.tar.gz
-    cp -R kibana-latest /var/www/nginx-default/kibana
+    cp -R kibana-latest /usr/share/nginx/www/kibana
   Then copy elasticsearch.yml file available in cookbooks/ss_kibana/files/default to /etc/elasticsearch/elasticsearch.yml.  When that is done:
 
     service elasticsearch restart
