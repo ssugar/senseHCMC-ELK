@@ -18,7 +18,7 @@ cd /home/vagrant
 dpkg -i elasticsearch-1.4.2.deb
 update-rc.d elasticsearch defaults 95 10
 service elasticsearch start
-dpkg -i logstash_1.4.2-1.deb
+dpkg -i logstash-1.4.2-1.deb
 service logstash restart
 tar -xvzf kibana-latest.tar.gz
 cp -R kibana-latest /usr/share/nginx/www/kibana
@@ -26,6 +26,7 @@ service elasticsearch restart
 SCRIPT
 
 $script2 = <<SCRIPT
+service nginx restart
 service logstash restart
 service elasticsearch restart
 SCRIPT
@@ -47,8 +48,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    config.vm.provision "shell", inline: $script
 
    #copy a few config files into their place post install
-   config.vm.provision "file", source: "./cookbooks/ss_logstash/files/default/logstash.conf", destination: "/home/vagrant/logstash.conf"
-   config.vm.provision "file", source: "./cookbooks/ss_kibana/files/default/elasticsearch.yml", destination: "/home/vagrant/elasticsearch.yml"
+   config.vm.provision "file", source: "./cookbooks/ss_logstash/files/default/logstash.conf", destination: "/etc/logstash/conf.d/logstash.conf"
+   config.vm.provision "file", source: "./cookbooks/ss_kibana/files/default/elasticsearch.yml", destination: "/etc/elasticsearch/elasticsearch.yml"
 
    #restart the services we just replaced configs for
    config.vm.provision "shell", inline: $script2
