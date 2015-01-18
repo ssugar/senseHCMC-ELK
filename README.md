@@ -9,7 +9,6 @@ If not using Vagrant and Chef, run the following commands on a fresh debian/ubun
 ###Prepare Apt###
   We will be setting apt to use a mirror located in Vietnam.
 
-    sudo su
     echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise main restricted universe multiverse" > /etc/apt/sources.list
     echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise-updates main restricted universe multiverse" >> /etc/apt/sources.list
     echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise-security main restricted universe multiverse" >> /etc/apt/sources.list
