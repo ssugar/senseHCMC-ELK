@@ -6,9 +6,12 @@ VAGRANTFILE_API_VERSION = "2"
 
 #bootload script to get chef-solo installed
 $script = <<SCRIPT
-sudo apt-get update
-sudo apt-get install curl -y
 sudo su
+echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise main restricted universe multiverse" > /etc/apt/sources.list
+echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise-updates main restricted universe multiverse" >> /etc/apt/sources.list
+echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise-security main restricted universe multiverse" >> /etc/apt/sources.list
+apt-get update
+apt-get install curl -y
 curl -L https://www.opscode.com/chef/install.sh | bash
 SCRIPT
 
