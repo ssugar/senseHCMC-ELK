@@ -13,10 +13,10 @@ execute "unpack_kibana" do
 end
 
 execute "move_kibana" do
-  command "cp -R kibana-latest /var/www/nginx-default/kibana"
+  command "cp -R kibana-latest /usr/share/nginx/www/kibana"
 end
 
-cookbook_file "/var/www/nginx-default/kibana/app/dashboards/default.json" do
+cookbook_file "/usr/share/nginx/www/kibana/app/dashboards/default.json" do
   source "drayteksyslog.json"
 end
 
