@@ -384,5 +384,6 @@
 #
 #http.jsonp.enable: true
 
+#the following two lines allow Kibana 3 to connect with >= Elasticsearch 1.4 but does remove a new security feature introduced in Elasticsearch 1.4.  When Kibana 4 is used (currently still beta), these lines should be removed.
 http.cors.allow-origin: "/.*/"
 http.cors.enabled: true
