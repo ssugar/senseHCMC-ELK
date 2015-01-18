@@ -26,6 +26,8 @@ service elasticsearch restart
 SCRIPT
 
 $script2 = <<SCRIPT
+cp /home/vagrant/elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
+cp /home/vagrant/logstash.conf /etc/logstash/conf.d/logstash.conf
 service nginx restart
 service logstash restart
 service elasticsearch restart
@@ -48,8 +50,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    config.vm.provision "shell", inline: $script
 
    #copy a few config files into their place post install
-   config.vm.provision "file", source: "./cookbooks/ss_logstash/files/default/logstash.conf", destination: "/etc/logstash/conf.d/logstash.conf"
-   config.vm.provision "file", source: "./cookbooks/ss_kibana/files/default/elasticsearch.yml", destination: "/etc/elasticsearch/elasticsearch.yml"
+   config.vm.provision "file", source: "./cookbooks/ss_logstash/files/default/logstash.conf", destination: "/home/vagrant/logstash.conf"
+   config.vm.provision "file", source: "./cookbooks/ss_kibana/files/default/elasticsearch.yml", destination: "/home/vagrant/elasticsearch.yml"
 
    #restart the services we just replaced configs for
    config.vm.provision "shell", inline: $script2
