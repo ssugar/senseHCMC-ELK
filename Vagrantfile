@@ -63,5 +63,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    #run a shell script that updates the elasticsearch mappings for proper viewing in elasticsearch (kibana) queries
    config.vm.provision "file", source: "./updatedEsMappings.tar", destination: "/home/vagrant/updatedEsMappings.tar"
    config.vm.provision "shell", inline: $script3
+
+   config.vm.provision "file", source: "./testing/sendData.py", destination: "/home/vagrant/sendData.py"
    
 end
