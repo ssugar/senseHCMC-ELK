@@ -33,6 +33,10 @@ service logstash restart
 service elasticsearch restart
 SCRIPT
 
+$script3 = <<SCRIPT
+tar -xvf /home/vagrant/updatedEsMappings.tar
+sh /home/vagrant/updatedEsMappings.sh
+SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    #Set the virtual machine 'box' to use
@@ -57,6 +61,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    config.vm.provision "shell", inline: $script2
    
    #run a shell script that updates the elasticsearch mappings for proper viewing in elasticsearch (kibana) queries
-   config.vm.provision "shell", path: "updatedEsMappings.sh"
+   config.vm.provision "file", source: "./updatedEsMappings.tar", destination: "/home/vagrant/updatedEsMappings.tar"
+   config.vm.provision "shell", inline: $script3
    
 end
