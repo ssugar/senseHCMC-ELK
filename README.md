@@ -23,7 +23,7 @@ If not using Vagrant and Chef, run the following commands on a fresh debian/ubun
 ###Install Logstash###
     wget https://download.elasticsearch.org/logstash/logstash/packages/debian/logstash_1.4.2-1-2c0f5a1_all.deb
     dpkg -i logstash_1.4.2-1-2c0f5a1_all.deb
-  Then copy the logstash.conf available in cookbooks/ss_logstash/files/default to /etc/logstash/conf.d/logstash.conf.  When that is done:
+  Then copy the logstash.conf file available in this project at: [cookbooks/ss_logstash/files/default/logstash.conf](cookbooks/ss_logstash/files/default/logstash.conf) to: /etc/logstash/conf.d/logstash.conf.  When that is done:
   
     service logstash restart
 
@@ -31,7 +31,7 @@ If not using Vagrant and Chef, run the following commands on a fresh debian/ubun
     wget https://download.elasticsearch.org/kibana/kibana/kibana-latest.tar.gz
     tar -xvzf kibana-latest.tar.gz
     cp -R kibana-latest /usr/share/nginx/www/kibana
-  Then copy elasticsearch.yml file available in cookbooks/ss_kibana/files/default to /etc/elasticsearch/elasticsearch.yml.  When that is done:
+  Then copy the elasticsearch.yml file available in this project at: [cookbooks/ss_kibana/files/default/elasticsearch.yml](cookbooks/ss_kibana/files/default/elasticsearch.yml) to: /etc/elasticsearch/elasticsearch.yml.  When that is done:
 
     service elasticsearch restart
 
