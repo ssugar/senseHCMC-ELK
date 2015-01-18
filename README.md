@@ -4,7 +4,7 @@
 Vagrantfile and Chef recipies to deploy the ELK stack (ElasticSearch, LogStash, and Kibana) for use in the senseHCMC project.
 
 ##Use##
-If not using Vagrant and Chef, run the following commands on a fresh linux install after logging in as root to mimic the same behaviour:
+If not using Vagrant and Chef, run the following commands on a fresh debian/ubuntu install after logging in as root to mimic the same behaviour:
 
 ###Prepare Apt###
     sudo apt-get update
