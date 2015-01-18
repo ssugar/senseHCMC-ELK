@@ -4,16 +4,32 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
-#bootload script to get chef-solo installed
+#script to set everything up. chef is slow to download now while the AAG line is cut so only using vagrant provisioners to speed development up
 $script = <<SCRIPT
 sudo su
-echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise main" > /etc/apt/sources.list
-echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise-updates main" >> /etc/apt/sources.list
-echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise-security main" >> /etc/apt/sources.list
+echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise main restricted universe" > /etc/apt/sources.list
+echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise-updates main restricted universe" >> /etc/apt/sources.list
+echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise-security main restricted universe" >> /etc/apt/sources.list
 apt-get update
 apt-get install curl -y
-curl -L https://www.opscode.com/chef/install.sh | bash
+apt-get install nginx -y
+apt-get install openjdk-7-jdk -y
+cd /home/vagrant
+dpkg -i elasticsearch-1.4.2.deb
+update-rc.d elasticsearch defaults 95 10
+service elasticsearch start
+dpkg -i logstash_1.4.2-1.deb
+service logstash restart
+tar -xvzf kibana-latest.tar.gz
+cp -R kibana-latest /usr/share/nginx/www/kibana
+service elasticsearch restart
 SCRIPT
+
+$script2 = <<SCRIPT
+service logstash restart
+service elasticsearch restart
+SCRIPT
+
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    #Set the virtual machine 'box' to use
@@ -21,21 +37,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    #Set the vm name
    config.vm.define :elkStack2 do |t|
    end
-   #Set the host name
-   config.vm.hostname = "elkStack2"
    
-   #run the script near the top of this file
+   #copy the ELK installer files locally to save time
+   config.vm.provision "file", source: "./localELK/elasticsearch-1.4.2.deb", destination: "/home/vagrant/elasticsearch-1.4.2.deb"
+   config.vm.provision "file", source: "./localELK/logstash-1.4.2-1.deb", destination: "/home/vagrant/logstash-1.4.2-1.deb"
+   config.vm.provision "file", source: "./localELK/kibana-latest.tar.gz", destination: "/home/vagrant/kibana-latest.tar.gz"
+   
+   #run the script above
    config.vm.provision "shell", inline: $script
 
-   #run through the chef recipies
-   config.vm.provision "chef_solo" do |chef|
-     chef.cookbooks_path = "cookbooks"
-     chef.add_recipe "ss_nginx"
-	 chef.add_recipe "ss_elasticsearch"
-	 chef.add_recipe "ss_kibana"
-	 chef.add_recipe "ss_logstash"
-   end
+   #copy a few config files into their place post install
+   config.vm.provision "file", source: "./cookbooks/ss_logstash/files/default/logstash.conf", destination: "/home/vagrant/logstash.conf"
+   config.vm.provision "file", source: "./cookbooks/ss_kibana/files/default/elasticsearch.yml", destination: "/home/vagrant/elasticsearch.yml"
 
+   #restart the services we just replaced configs for
+   config.vm.provision "shell", inline: $script2
+   
    #run a shell script that updates the elasticsearch mappings for proper viewing in elasticsearch (kibana) queries
    config.vm.provision "shell", path: "updatedEsMappings.sh"
    
