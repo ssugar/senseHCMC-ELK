@@ -3,12 +3,16 @@
 ##Description##
 Vagrantfile and Chef recipies to deploy the ELK stack [Elasticsearch, Logstash, and Kibana](http://www.elasticsearch.org/overview/) for use in the senseHCMC project.
 
-##Use##
+##Setup without Vagrant##
 If not using Vagrant and Chef, run the following commands on a fresh debian/ubuntu install after logging in as root to mimic the same behaviour:
 
 ###Prepare Apt###
-    sudo apt-get update
+We will be setting apt to use a mirror located in Vietnam.
     sudo su
+    echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise main restricted universe multiverse" > /etc/apt/sources.list
+    echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise-updates main restricted universe multiverse" >> /etc/apt/sources.list
+    echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise-security main restricted universe multiverse" >> /etc/apt/sources.list
+    apt-get update
 
 ###Install Nginx###
     apt-get install nginx
