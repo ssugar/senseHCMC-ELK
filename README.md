@@ -8,11 +8,24 @@ If not using Vagrant and Chef, run the following commands on a fresh debian/ubun
 
 ###Prepare Apt###
   We will be setting apt to use a mirror located in Vietnam.
+  
+  Example 1 - Debian Wheezy
+  -------------------------
+  
+    echo "deb http://mirror.debian.vn/debian/ wheezy main restricted universe multiverse" > /etc/apt/sources.list
+    echo "deb http://mirror.debian.vn/debian/ wheezy-updates main restricted universe multiverse" >> /etc/apt/sources.list
+    echo "deb http://mirror.debian.vn/debian/ wheezy-security main restricted universe multiverse" >> /etc/apt/sources.list
+	
+  Example 2 - Ubuntu Precise Pangolin
+  -----------------------------------
 
     echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise main restricted universe multiverse" > /etc/apt/sources.list
     echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise-updates main restricted universe multiverse" >> /etc/apt/sources.list
     echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise-security main restricted universe multiverse" >> /etc/apt/sources.list
-    apt-get update
+  
+  Update apt after changing sources
+  
+	apt-get update
 
 ###Install Nginx###
     apt-get install nginx
