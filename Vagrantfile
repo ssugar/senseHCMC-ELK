@@ -35,7 +35,7 @@ SCRIPT
 
 $script3 = <<SCRIPT
 tar -xvf /home/vagrant/updatedEsMappings.tar
-sh /home/vagrant/updatedEsMappings.sh
+/home/vagrant/updatedEsMappings.sh
 SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
