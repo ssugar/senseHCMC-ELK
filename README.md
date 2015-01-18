@@ -12,16 +12,16 @@ If not using Vagrant and Chef, run the following commands on a fresh debian/ubun
   Example 1 - Debian Wheezy
   -------------------------
   
-    echo "deb http://mirror.debian.vn/debian/ wheezy main restricted universe multiverse" > /etc/apt/sources.list
-    echo "deb http://mirror.debian.vn/debian/ wheezy-updates main restricted universe multiverse" >> /etc/apt/sources.list
-    echo "deb http://mirror.debian.vn/debian/ wheezy-security main restricted universe multiverse" >> /etc/apt/sources.list
+    echo "deb http://mirror.debian.vn/debian/ wheezy main" > /etc/apt/sources.list
+    echo "deb http://mirror.debian.vn/debian/ wheezy-updates main" >> /etc/apt/sources.list
+    echo "deb http://mirror.debian.vn/debian/ wheezy-security main" >> /etc/apt/sources.list
 	
   Example 2 - Ubuntu Precise Pangolin
   -----------------------------------
 
-    echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise main restricted universe multiverse" > /etc/apt/sources.list
-    echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise-updates main restricted universe multiverse" >> /etc/apt/sources.list
-    echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise-security main restricted universe multiverse" >> /etc/apt/sources.list
+    echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise main" > /etc/apt/sources.list
+    echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise-updates main" >> /etc/apt/sources.list
+    echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise-security main" >> /etc/apt/sources.list
   
   Update apt after changing sources
   
