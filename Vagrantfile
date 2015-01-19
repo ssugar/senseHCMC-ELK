@@ -28,6 +28,7 @@ SCRIPT
 $script2 = <<SCRIPT
 cp /home/vagrant/elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
 cp /home/vagrant/logstash.conf /etc/logstash/conf.d/logstash.conf
+cp /home/vagrant/senseHCMCDashboard.json /usr/share/nginx/www/kibana/app/dashboards/default.json
 service nginx restart
 service logstash restart
 service elasticsearch restart
@@ -56,6 +57,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    #copy a few config files into their place post install
    config.vm.provision "file", source: "./cookbooks/ss_logstash/files/default/logstash.conf", destination: "/home/vagrant/logstash.conf"
    config.vm.provision "file", source: "./cookbooks/ss_kibana/files/default/elasticsearch.yml", destination: "/home/vagrant/elasticsearch.yml"
+   config.vm.provision "file", source: "./cookbooks/ss_kibana/files/default/senseHCMCDashboard.json", destination: "/home/vagrant/senseHCMCDashboard.json"
+   config.vm.provision "file", source: "./testing/sendData.py", destination: "/home/vagrant/sendData.py"
 
    #restart the services we just replaced configs for
    config.vm.provision "shell", inline: $script2
@@ -64,6 +67,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    config.vm.provision "file", source: "./updatedEsMappings.tar", destination: "/home/vagrant/updatedEsMappings.tar"
    config.vm.provision "shell", inline: $script3
 
-   config.vm.provision "file", source: "./testing/sendData.py", destination: "/home/vagrant/sendData.py"
    
 end
