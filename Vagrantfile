@@ -32,6 +32,7 @@ cp /home/vagrant/senseHCMCDashboard.json /usr/share/nginx/www/kibana/app/dashboa
 service nginx restart
 service logstash restart
 service elasticsearch restart
+crontab -l | { cat; echo "* * * * * python /home/vagrant/sendData.py"; } | crontab -
 SCRIPT
 
 $script3 = <<SCRIPT
