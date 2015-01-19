@@ -69,9 +69,9 @@ If not using Vagrant and Chef, run the following commands on a fresh debian/ubun
   /usr/share/nginx/www/kibana/app/dashboards/default.json
 
 ###Testing Script###
-  This will send a json string over UDP with random data for 6 sensors into Logstash.
+  This will send a json formatted string over UDP with six random data points, one for each of the six testing sensors, into Logstash.  Cron job below will run this script once every minute.
 
   Copy the sendData.py file available in this project at: [testing/sendData.py](testing/sendData.py) to the server, then create a cronjob replacing /path/to/sendData.py with your path:
  
     crontab -l | { cat; echo "* * * * * python /path/to/sendData.py"; } | crontab -   
-
+  This testing script could be be easily modified to run from a different machine, use a different port, or even a different protocol.
