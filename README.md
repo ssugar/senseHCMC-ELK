@@ -36,10 +36,13 @@ If not using Vagrant and Chef, run the following commands on a fresh debian/ubun
     dpkg -i elasticsearch-1.4.2.deb
     update-rc.d elasticsearch defaults 95 10
     service elasticsearch start
+  Elasticsearch 1.4.2 debian package available [here](localELK/elasticsearch-1.4.2.deb).  Use this if connection to elasticsearch.org is slow.
 
 ###Install Logstash###
     wget https://download.elasticsearch.org/logstash/logstash/packages/debian/logstash_1.4.2-1-2c0f5a1_all.deb
     dpkg -i logstash_1.4.2-1-2c0f5a1_all.deb
+  Logstash 1.4.2-1 debian package available [here](localELK/logstash-1.4.2-1.deb).  Use this if connection to elasticsearch.org is slow.
+
   Then copy the logstash.conf file available in this project at: [cookbooks/ss_logstash/files/default/logstash.conf](cookbooks/ss_logstash/files/default/logstash.conf) to: /etc/logstash/conf.d/logstash.conf.  When that is done:
   
     service logstash restart
@@ -48,6 +51,8 @@ If not using Vagrant and Chef, run the following commands on a fresh debian/ubun
     wget https://download.elasticsearch.org/kibana/kibana/kibana-latest.tar.gz
     tar -xvzf kibana-latest.tar.gz
     cp -R kibana-latest /usr/share/nginx/www/kibana
+  Kibana 3 tarball available [here](localELK/kibana-latest.tar.gz).  Use this if connection to elasticsearch.org is slow.
+
   Then copy the elasticsearch.yml file available in this project at: [cookbooks/ss_kibana/files/default/elasticsearch.yml](cookbooks/ss_kibana/files/default/elasticsearch.yml) to: /etc/elasticsearch/elasticsearch.yml.  When that is done:
 
     service elasticsearch restart
@@ -55,13 +60,20 @@ If not using Vagrant and Chef, run the following commands on a fresh debian/ubun
 ###Access Web Portal###
     http://server_ip/kibana
 
-###Basic 6 Sensor Kibana Dashboard###
-  This will set a basic 6 sensor dashboard as the default dasboard in Kibana.
-  Copy the senseHCMCDashboard.json file available in this project at: [cookbooks/ss_kibana/files/default/senseHCMCDashboard.json](cookbooks/ss_kibana/files/default/senseHCMCDashboard.json) to /usr/share/nginx/www/kibana/app/dashboards/default.json
+##Testing##
+###sendData.py script###
+  This will send a json formatted string over UDP with six random data points, one for each of the six testing sensors, into Logstash.  Cron job below will run this script once every minute.
 
-###Testing Script###
-  This will send a json string over UDP with random data for 6 sensors into Logstash.
   Copy the sendData.py file available in this project at: [testing/sendData.py](testing/sendData.py) to the server, then create a cronjob replacing /path/to/sendData.py with your path:
  
     crontab -l | { cat; echo "* * * * * python /path/to/sendData.py"; } | crontab -   
+  This testing script could be be easily modified to run from a different machine, use a different port, or even a different protocol.
+
+###Basic 6 Sensor Kibana Dashboard###
+  This will set a basic 6 sensor dashboard as the default dasboard in Kibana.  This dashboard was based off of data created by the testing script above, so it will require changes when the sensor names are chosen.
+
+  Copy the senseHCMCDashboard.json file available in this project at: 
+  [cookbooks/ss_kibana/files/default/senseHCMCDashboard.json](cookbooks/ss_kibana/files/default/senseHCMCDashboard.json) 
+  to: 
+  /usr/share/nginx/www/kibana/app/dashboards/default.json
 
