@@ -38,7 +38,7 @@ If not using Vagrant and Chef, run the following commands on a fresh debian/ubun
     service elasticsearch start
   Elasticsearch 1.4.2 debian package available [here](localELK/elasticsearch-1.4.2.deb).  Use this if connection to elasticsearch.org is slow.
 
-  ###Install Logstash###
+###Install Logstash###
     wget https://download.elasticsearch.org/logstash/logstash/packages/debian/logstash_1.4.2-1-2c0f5a1_all.deb
     dpkg -i logstash_1.4.2-1-2c0f5a1_all.deb
   Logstash 1.4.2-1 debian package available [here](localELK/logstash-1.4.2-1.deb).  Use this if connection to elasticsearch.org is slow.
