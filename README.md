@@ -62,6 +62,7 @@ If not using Vagrant and Chef, run the following commands on a fresh debian/ubun
 
 ###Basic 6 Sensor Kibana Dashboard###
   This will set a basic 6 sensor dashboard as the default dasboard in Kibana.
+
   Copy the senseHCMCDashboard.json file available in this project at: 
   [cookbooks/ss_kibana/files/default/senseHCMCDashboard.json](cookbooks/ss_kibana/files/default/senseHCMCDashboard.json) 
   to: 
@@ -69,6 +70,7 @@ If not using Vagrant and Chef, run the following commands on a fresh debian/ubun
 
 ###Testing Script###
   This will send a json string over UDP with random data for 6 sensors into Logstash.
+
   Copy the sendData.py file available in this project at: [testing/sendData.py](testing/sendData.py) to the server, then create a cronjob replacing /path/to/sendData.py with your path:
  
     crontab -l | { cat; echo "* * * * * python /path/to/sendData.py"; } | crontab -   
