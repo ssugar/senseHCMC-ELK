@@ -3,6 +3,7 @@
 ##Description##
 Vagrantfile and Chef recipes to deploy the ELK stack [Elasticsearch, Logstash, and Kibana](http://www.elasticsearch.org/overview/) for use in the senseHCMC project.
 
+===================================
 ##Setup without Vagrant##
 If not using Vagrant and Chef, run the following commands on a fresh debian/ubuntu install after logging in as root to mimic the same behaviour:
 
@@ -59,7 +60,7 @@ If not using Vagrant and Chef, run the following commands on a fresh debian/ubun
 
 ###Access Web Portal###
     http://server_ip/kibana
-
+===================================
 ##Testing##
 ###sendData.py script###
   This will send a json formatted string over UDP with six random data points, one for each of the six testing sensors, into Logstash.  Cron job below will run this script once every minute.

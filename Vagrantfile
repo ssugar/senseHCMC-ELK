@@ -29,6 +29,9 @@ $script2 = <<SCRIPT
 cp /home/vagrant/elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
 cp /home/vagrant/logstash.conf /etc/logstash/conf.d/logstash.conf
 cp /home/vagrant/senseHCMCDashboard.json /usr/share/nginx/www/kibana/app/dashboards/default.json
+cd /usr/share/elasticsearch
+bin/plugin -install lukas-vlcek/bigdesk
+cd /home/vagrant
 service nginx restart
 service logstash restart
 service elasticsearch restart
@@ -36,8 +39,9 @@ crontab -l | { cat; echo "* * * * * python /home/vagrant/sendData.py"; } | cront
 SCRIPT
 
 $script3 = <<SCRIPT
-tar -xvf /home/vagrant/updatedEsMappings.tar
-/home/vagrant/updatedEsMappings.sh
+cd /home/vagrant
+tar -xvf updatedEsMappings.tar
+./updatedEsMappings.sh
 SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
