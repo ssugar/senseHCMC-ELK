@@ -627,5 +627,5 @@
       "enable": true
     }
   ],
-  "refresh": false
+  "refresh": "1m"
 }
