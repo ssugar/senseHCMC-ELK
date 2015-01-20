@@ -30,6 +30,7 @@ If not using Vagrant and Chef, run the following commands on a fresh debian/ubun
 
 ###Install Nginx###
     apt-get install nginx
+	service nginx start
   
 ###Install Elasticsearch###
     apt-get install openjdk-7-jdk
