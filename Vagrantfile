@@ -10,6 +10,8 @@ sudo su
 echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise main restricted universe" > /etc/apt/sources.list
 echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise-updates main restricted universe" >> /etc/apt/sources.list
 echo "deb http://mirror-fpt-telecom.fpt.net/ubuntu/ precise-security main restricted universe" >> /etc/apt/sources.list
+echo "Asia/Ho_Chi_Minh" > /etc/timezone
+dpkg-reconfigure --frontend noninteractive tzdata
 apt-get update
 apt-get install curl -y
 apt-get install nginx -y
@@ -31,11 +33,6 @@ cp /home/vagrant/senseHCMCDashboard.json /usr/share/nginx/www/kibana/app/dashboa
 service nginx restart
 service logstash restart
 crontab -l | { cat; echo "* * * * * python /home/vagrant/sendData.py"; } | crontab -
-SCRIPT
-
-$script3 = <<SCRIPT
-echo "Asia/Ho_Chi_Minh" > /etc/timezone
-dpkg-reconfigure --frontend noninteractive tzdata
 SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -66,7 +63,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    #run a shell script that updates the elasticsearch mappings for proper viewing in elasticsearch (kibana) queries
    config.vm.provision "shell", path: "updatedEsMappings.sh"
 
-   config.vm.provision "shell", inline: $script3
-
-   
 end
