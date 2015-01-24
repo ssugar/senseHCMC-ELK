@@ -62,4 +62,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
    #run a shell script that updates the elasticsearch mappings for proper viewing in elasticsearch (kibana) queries
    config.vm.provision "shell", path: "updatedEsMappings.sh"
+
 end

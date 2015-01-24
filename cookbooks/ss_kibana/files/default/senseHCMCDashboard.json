@@ -20,9 +20,10 @@
     "filter": {
       "list": {
         "0": {
-          "type": "terms",
-          "field": "_type",
-          "value": "sensorData",
+          "type": "time",
+          "field": "@timestamp",
+          "from": "now-1h",
+          "to": "now",
           "mandate": "must",
           "active": true,
           "alias": "",
@@ -624,7 +625,9 @@
         "1d"
       ],
       "timefield": "@timestamp",
-      "enable": true
+      "enable": true,
+      "now": true,
+      "filter_id": 0
     }
   ],
   "refresh": "1m"
