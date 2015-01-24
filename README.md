@@ -28,6 +28,10 @@ If not using Vagrant and Chef, run the following commands on a fresh debian/ubun
   
 	apt-get update
 
+###Set Timezone to HCMC###
+    echo "Asia/Ho_Chi_Minh" > /etc/timezone
+    dpkg-reconfigure --frontend noninteractive tzdata
+
 ###Install Nginx###
     apt-get install nginx
 	service nginx start
