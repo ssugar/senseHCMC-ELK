@@ -32,6 +32,7 @@ cp /home/vagrant/logstash.conf /etc/logstash/conf.d/logstash.conf
 cp /home/vagrant/senseHCMCDashboard.json /usr/share/nginx/www/kibana/app/dashboards/default.json
 service nginx restart
 service logstash restart
+crontab -l | { cat; echo "* * * * * python /home/vagrant/sendData.py"; } | crontab - 
 SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
