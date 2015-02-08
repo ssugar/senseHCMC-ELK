@@ -38,8 +38,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    #Set the virtual machine 'box' to use
    config.vm.box = "hashicorp/precise64"
    #Set the vm name
-   config.vm.define :elkStack2 do |t|
+   config.vm.define :senseHCMC do |t|
    end
+
+   config.vm.provider :hyperv do |v|
+	 v.vmname = "senseHCMC"
+     v.memory = 1024
+	 v.cpus = 1
+   end
+
+
    
    #copy the ELK installer files locally to save time
    config.vm.provision "file", source: "./localELK/elasticsearch-1.4.2.deb", destination: "/home/vagrant/elasticsearch-1.4.2.deb"
